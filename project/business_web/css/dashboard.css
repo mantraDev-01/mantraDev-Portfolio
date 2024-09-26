@@ -1,27 +1,30 @@
 body{
     box-sizing: border-box;
-    background-color:#040a12;
+    background-color:#141515;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color:white;
     scroll-behavior: smooth;
     margin:0;
 }
 nav{
-    background-color:#182c49;
-    border:1px solid red;
+    background-color:rgb(10, 10, 10);
+    border-bottom:1px solid black;
     height:4em;
     width:100%;
     margin:0;
+    color:rgb(255, 254, 254);
 }
 .navigation{
     display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr .5fr;
     grid-template-areas: 
-    "logo search cart";
+    "logo search cart quantity";
     gap:1em;
     justify-content: center;
     align-items: center;
-    border:2px solid blue;
+}
+.cart-quantity-{
+    grid-area:quantity;
 }
 .cart{
     grid-area:cart;
@@ -45,7 +48,7 @@ nav{
     height:2.5em;
 }
 .product-grid{
-    border:2px solid red;
+    border:1px solid black;
     display:grid;
     grid-template-columns: repeat(5, 1fr); 
     width:65%;
@@ -53,14 +56,19 @@ nav{
     gap:1em;
     margin:4em auto;
     min-width:315px;
+    color:rgb(237, 231, 231);
+    background-color: #d6dadf;
+    box-shadow: 0px 10px 20px black;
+    background-color: #161717;
 }
 .container{
-    border:1px solid yellow;
+    border:1px solid black;
+    box-shadow:0px 5px 10px black;
     padding:2em;
 }
 .img-area{
     margin:0 auto;
-    height:8em;
+    height:9em;
     width:100%;
     border:1px solid green;
     margin:0 auto;
@@ -82,14 +90,21 @@ nav{
     }
 }
 @media screen and (max-width:880px){
-    main{
+    .product-grid{
         display:grid;
         grid-template-columns: repeat(3, 1fr); 
 
     }
     .img-area{
-        height:8em;
+        height:12em;
         min-width:60px;
+    }
+    .container{
+        font-size: .6rem;
+    }
+    .order-btn{
+        font-size: .6rem;
+        padding:.3em;
     }
 }
 .order-btn{
@@ -99,4 +114,6 @@ nav{
     width:6em;
     background-color:#FFCB74;
     font-weight:700;
+    border:1px solid yellow;
+    box-shadow:0px 5px 10px black;
 }

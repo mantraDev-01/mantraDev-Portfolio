@@ -1,0 +1,1 @@
+var ImageResultsCollections;(function(){var n=function(){var n=_ge("irpcb");if(n){var t=function(){Log===null||Log===void 0?void 0:Log.Log("Click","Button","Collections",!1,"Component","ImageResultsVisualComponent")},i=function(){t("NavigateToCollections");window.open("/saves?FORM=COLFBC","_blank")};sj_be(n,"click",i)}};n()})(ImageResultsCollections||(ImageResultsCollections={}))

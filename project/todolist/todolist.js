@@ -1,10 +1,18 @@
-const todoList = [{
-    name: 'What To-Do?',
-    time: 'What Time?'
-}];
+let todoList = JSON.parse(localStorage.getItem('todoList'));
+
+if(!todoList){
+    todoList = [{
+        name: 'todoList',
+        time: 'time'
+    }];
+}
+
+function saveStorage(){
+localStorage.setItem('todoList', JSON.stringify(todoList));
+}
 
 const btn = document.querySelector('.addbtn');
-const res = document.querySelector('.res');
+const result = document.querySelector('.result');
 
     renderx();
 
@@ -12,20 +20,61 @@ const res = document.querySelector('.res');
         
         let todoListHtml = '';
 
-        todoList.forEach(function(todoObject, index){
-
-            const todox = todoObject.name;
-            const timex = todoObject.time;
+        todoList.forEach((todo) => {
             html =
-            `<div class="todojs">${todox}</div> <div class="timejs">${timex}</div>
-            <button class="dlt_btn" onclick="todoList.splice(${index}, 1); renderx();">Delete</button>`
+            `
+            <div class="res todolist-container-${todo.name}">
+            <div class="todojs">${todo.name}</div> 
+            <div class="timejs">${todo.time}</div>
+            <button class="dlt_btn" data-todolist-delete="${todo.name}">Delete</button>
+            </div>
+            `
+
+
 
             
 
             todoListHtml += html;
             
-        })
-        res.innerHTML = todoListHtml;
+        
+        result.innerHTML = todoListHtml;
+
+        });
+
+        function removeTodo(todoId){
+            let newTodo = [];
+        
+            todoList.forEach((todo) => {
+            if(todo.name !== todoId){
+                newTodo.push(todo);
+            };
+            todoList = newTodo;
+            });
+            saveStorage();
+        }
+
+        document.querySelectorAll('.dlt_btn')
+    .forEach((link) => {
+        link.addEventListener('click', () => {
+            const todoId = link.dataset.todolistDelete;
+
+
+            removeTodo(todoId);
+                
+
+                
+            
+           const container = document.querySelector(`.todolist-container-${todoId}`);
+
+           container.remove();
+
+        
+            
+        });
+        
+    });
+
+            
     
             
     
@@ -49,13 +98,15 @@ function addTodo(){
         return;
     }else{
         todoList.push({name: inputVal, time: timeVal});
+        
     }
 
-    
+    saveStorage();
 
     inp.value = '';
     time.value = '';
     renderx();
+    
 }
 
 btn.addEventListener('click', addTodo);
@@ -64,5 +115,6 @@ const back = document.querySelector('.back');
 function backx(){
 error.style.display = 'none'
 }
-    
+
+console.log(todoList)
 

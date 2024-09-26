@@ -57,14 +57,10 @@ main{
 .result{
     color:white;
     display:grid;
-    grid-template-columns: 1fr 0.3fr 0.3fr 0.3fr;
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: repeat(10, .1fr);
+    
+    height:500px;
 
-    grid-template-areas:
-        "todox time blank blank"
-        "res res res res"
-
-     ;
 }
 .todox{
     grid-area: todox;
@@ -72,27 +68,13 @@ main{
     font-size: 1.5rem;
     font-weight:bold;
 }
-.time{
-    grid-area: time;
-    grid-column: 2;
-    grid-row:1;
-    font-size: 1.5rem;
-    font-weight:bold;
-}
-.todos{
-    grid-area: todos;
-}
-.timex{
-    grid-area:timex;
-    grid-column: 2;
-    grid-row:2;
-}
+
 .res{
+    height:35px;
     font-size:1rem;
     font-weight:lighter;
     padding:1em;
     gap:1em;
-    grid-area: res;
     display:grid;
     grid-template-columns:  1fr 0.5fr 0.3fr;
 
