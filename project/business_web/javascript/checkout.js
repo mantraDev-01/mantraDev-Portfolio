@@ -1,9 +1,13 @@
-import {cart, removeToCart, saveToStorage} from '../data/cart.js';
+import {cart, removeToCart, saveToStorage, minus} from '../data/cart.js';
 
 let checkoutHtml = '';
 
 cart.forEach((item) => {
 
+    
+
+   
+     
 checkoutHtml +=
     `<div class="items js-items-${item.id}">
         <div class="img-area">
@@ -19,28 +23,36 @@ checkoutHtml +=
         </div>
 
         <div class="quantity">
-            <strong>quantity:</strong> ${item.quantity}
+            <strong>quantity:</strong> 
+            <button class="minus" data-product-id="${item.id}">-</button>
+             ${item.quantity} 
+             <button class="add">+</button>
         </div>
 
         <button class="dlt-btn" data-product-id="${item.id}">delete</button>
 
-        <input type="checkbox" class="checkbox">
+        <input type="checkbox" class="checkbox" data-product-id="${item.id}">
 
         
     </div>`
 
+
 });
+
+
 
 document.querySelector('.cart-grid')
 .innerHTML = checkoutHtml;
 
 let totalQuantity = 0;
 let totalOrder = 0;
+let total;
 
     
     cart.forEach((item) =>{
         totalQuantity += parseFloat(item.quantity);
-        totalOrder += parseFloat(item.price);
+        total = item.quantity * item.price;
+        totalOrder += total;
         
         
     });
@@ -63,6 +75,21 @@ let totalOrder = 0;
             const productId = link.dataset.productId;
 
             removeToCart(productId);
+            let totalQuantity = 0;
+            let totalOrder = 0;
+
+                
+                cart.forEach((item) =>{
+                    totalQuantity += parseFloat(item.quantity);
+                    totalOrder += parseFloat(item.price);
+                    
+                    
+                });
+                document.querySelector('.js-items-count')
+                .innerHTML = `Items: ${totalQuantity}`;
+
+                    document.querySelector('.total-order')
+                .innerHTML = `Total Order: ${totalOrder}`
                
                 
             
@@ -73,5 +100,20 @@ let totalOrder = 0;
     
             
         });
+        
     });
+
+    document.querySelectorAll('.minus')
+    .forEach((check) => {
+        const productId = check.dataset.productId;
+
+        if(!check.checked){
+            console.log('hello')
+        }
+        else{
+            console.log('hi')
+        }
+    })
+
+    
     console.log(cart)

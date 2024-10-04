@@ -3,9 +3,15 @@ import {Products} from '../data/products.js';
 
 let productHTML = '';
 
+    const selecta = document.querySelector('.selecta');
+
+    
 
 
     Products.forEach((product) =>{
+
+        
+
         productHTML += `   <div class="container">
             <div class="img-area">
                 <img class="img-product" src="${product.image}">
@@ -20,7 +26,7 @@ let productHTML = '';
             </div>
 
             <div class="quantity">
-                <select value="1" class="selecta">
+                <select class="selecta js-product-quantity-${product.id}">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -43,9 +49,12 @@ let productHTML = '';
                 class="order-btn js-add-to-cart">Add to cart</button>
             </div>
         </div>`
+        
 
         
     });
+
+    
     
     const grid = document.querySelector('.product-grid');
     grid.innerHTML = productHTML;
@@ -61,35 +70,25 @@ let productHTML = '';
             const productPrice = button.dataset.productPrice;
             const productImage = button.dataset.productImage;
             const productQuantity = button.dataset.productQuantity;
-            let cartQuantity = 0;
 
-                    cart.forEach((quantityx) => {
-                        cartQuantity += parseFloat(quantityx.quantity);
-                    });
-            
-                    const quantityCounter = document.querySelector('.quantity-counter');
-                    quantityCounter.innerHTML = cartQuantity;
-            
+
    
                 let matchItem;
             
                     cart.forEach((item) => {
                         if(productId === item.id){
                             matchItem = item;
+                            
                         }
                     });
+
+                    const quantitySelector = document.querySelector(`.js-product-quantity-${productId}`)
+
+                    const quantity = Number(quantitySelector.value);
             
                     if(matchItem){
-                        matchItem.quantity += 1;
+                        matchItem.quantity += parseFloat(quantity);
                         
-                    }else{
-                        cart.push({
-                            id: productName,
-                            image: productImage,
-                            name : productName,
-                            price : productPrice,
-                            quantity: productQuantity,
-                        });
                         let cartQuantity = 0;
 
                         cart.forEach((quantityx) => {
@@ -98,22 +97,39 @@ let productHTML = '';
 
                         const quantityCounter = document.querySelector('.quantity-counter');
                         quantityCounter.innerHTML = cartQuantity;
+                        
+                
+                        saveToStorage();
+
+                    }else{
+                        cart.push({
+                            id: productId,
+                            image: productImage,
+                            name : productName,
+                            price : productPrice,
+                            quantity: quantity,
+                        });
+
 
                         
+                        let cartQuantity = 0;
+
+                        cart.forEach((quantityx) => {
+                            cartQuantity += parseFloat(quantityx.quantity);
+                        });
+
+                        const quantityCounter = document.querySelector('.quantity-counter');
+                        quantityCounter.innerHTML = cartQuantity;
+                        
+                
                         saveToStorage();
                        
                     }
-                    
-            
-            console.log(cart)   
-                     
-            
-
-            
+            console.log(cart);
         });
-        
-        
+       
     });
+    
 
     
     
@@ -124,6 +140,20 @@ let productHTML = '';
         .addEventListener('click', () => {
             document.location = 'cart.html';
         });
+
+        let cartQuantity = 0;
+
+                        cart.forEach((quantityx) => {
+                            cartQuantity += parseFloat(quantityx.quantity);
+                        });
+
+                        const quantityCounter = document.querySelector('.quantity-counter');
+                        quantityCounter.innerHTML = cartQuantity;
+                        
+                        
+
+                        
+                        saveToStorage();
 
         
         
