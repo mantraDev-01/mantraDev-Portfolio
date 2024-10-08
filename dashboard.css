@@ -202,8 +202,8 @@ section{
 }
 .sbox{
     position:relative;
-    height:50%;
-    width:75px;
+    height:60%;
+    width:90px;
     border-radius:30%;
     box-shadow: 0px 10px 15px black;
     background-color: #072E33;
@@ -333,6 +333,8 @@ section{
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 0.1fr 0.1fr;
         gap:1em;
+        justify-content: center;
+        align-items: center;
         
     
         grid-template-areas:
@@ -345,10 +347,12 @@ section{
     }
     .grid2{
         grid-area: two;
+        margin-left:2em;
         
     }
     .grid3{
         grid-area: three;
+        margin-left:2em;
     }
 }
 .sbox:hover{

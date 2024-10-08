@@ -1,4 +1,5 @@
 import {cart, removeToCart, saveToStorage, minus} from '../data/cart.js';
+import '../backend/backend-practice.js'
 
 let checkoutHtml = '';
 
@@ -31,7 +32,7 @@ checkoutHtml +=
 
         <button class="dlt-btn" data-product-id="${item.id}">delete</button>
 
-        <input type="checkbox" class="checkbox" data-product-id="${item.id}">
+        <input type="checkbox" class="checkbox js-cbox-${item.id}" data-product-id="${item.id}">
 
         
     </div>`
@@ -103,17 +104,9 @@ let total;
         
     });
 
-    document.querySelectorAll('.minus')
-    .forEach((check) => {
-        const productId = check.dataset.productId;
-
-        if(!check.checked){
-            console.log('hello')
-        }
-        else{
-            console.log('hi')
-        }
-    })
-
+   
     
     console.log(cart)
+
+
+    
