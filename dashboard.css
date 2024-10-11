@@ -353,6 +353,7 @@ section{
     .grid3{
         grid-area: three;
         margin-left:2em;
+        border:1px solid black;
     }
 }
 .sbox:hover{
